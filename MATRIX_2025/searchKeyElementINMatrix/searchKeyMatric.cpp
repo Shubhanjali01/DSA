@@ -16,7 +16,6 @@ int main(){
 
     int key = 5;
 
-
     int rows = matrix.size();
     int cols = matrix[0].size();
 

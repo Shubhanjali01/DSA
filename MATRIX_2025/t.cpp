@@ -1,28 +1,59 @@
-// C++ program for the above approach
+#include <iostream>
+#include <vector>
+#include <algorithm> // For sort()
 
-#include <bits/stdc++.h>
 using namespace std;
+
+void sortColumns(vector<vector<int>> &mat, int row, int col)
+{
+    for (int i = 0; i < col; i++)
+    {
+        // Step 1: Extract the column
+        vector<int> temp;
+        for (int j = 0; j < row; j++)
+        {
+            temp.push_back(mat[j][i]);
+        }
+
+        // Step 2: Sort the column
+        sort(temp.begin(), temp.end());
+
+        // Step 3: Put back the sorted values
+        for (int j = 0; j < row; j++)
+        {
+            mat[j][i] = temp[j];
+        }
+    }
+}
+
+// Function to print the matrix
+void printMatrix(const vector<vector<int>> &mat)
+{
+    for (auto row : mat)
+    {
+        for (auto val : row)
+            cout << val << " ";
+        cout << endl;
+    }
+}
 
 int main()
 {
-    // Input
-    vector<vector<int>> mat = {{1, 4, 8},
-                               {9, 4, 2},
-                               {9, 6, 2}};
-    
-    int n = mat.size();
-    int priSum =0;
-    int secSum = 0;
-    for(int i=0;i<n;i++){
-        priSum += mat[i][i];
-        secSum += mat[i][n-i-1];
-    }
-    int totalSum = priSum + secSum;
+    vector<vector<int>> mat = {
+        {5, 4, 7},
+        {1, 3, 8},
+        {2, 9, 6}};
 
-    if(n%2 == 1){
-        totalSum -= mat[n/2][n/2];
-    }
-   cout<<totalSum<<endl;
+    int row = mat.size();
+    int col = mat[0].size();
+
+    cout << "Original Matrix:\n";
+    printMatrix(mat);
+
+    sortColumns(mat, row, col);
+
+    cout << "\nMatrix After Column-wise Sort:\n";
+    printMatrix(mat);
 
     return 0;
 }
