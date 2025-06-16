@@ -1,42 +1,60 @@
 #include <iostream>
 #include <string>
-#include <algorithm>
+#include <algorithm> // for replace
 using namespace std;
 
 class Solution {
 public:
-    int minMaxDifference(int num) {
+    int maxDiff(int num) {
         string s = to_string(num);
-        string t = s;
 
-        // Create max number: replace first non-'9' digit with '9'
-        size_t pos = s.find_first_not_of('9');
-        if (pos != string::npos) {
-            char a = s[pos];
-            replace(s.begin(), s.end(), a, '9');
+        // Maximize the number
+        string maxStr = s;
+        for (char ch : s) {
+            if (ch != '9') {
+                replace(maxStr.begin(), maxStr.end(), ch, '9');
+                break;
+            }
         }
 
-        // Create min number: replace the first digit with '0'
-        char b = t[0];
-        replace(t.begin(), t.end(), b, '0');
+        // Minimize the number
+        string minStr = s;
+        if (s[0] != '1') {
+            char target = s[0];
+            replace(minStr.begin(), minStr.end(), target, '1');
+        } else {
+            for (int i = 1; i < s.length(); ++i) {
+                if (s[i] != '0' && s[i] != '1') {
+                    char target = s[i];
+                    replace(minStr.begin(), minStr.end(), target, '0');
+                    break;
+                }
+            }
+        }
 
-        return stoi(s) - stoi(t);
+        int maxNum = stoi(maxStr);
+        int minNum = stoi(minStr);
+        return maxNum - minNum;
     }
 };
 
 int main() {
     Solution sol;
-
+    
     // Test case 1
-    int num1 = 11891;
+    int num1 = 555;
     cout << "Input: " << num1 << endl;
-    cout << "Output: " << sol.minMaxDifference(num1) << endl << endl;
+    cout << "Max Difference: " << sol.maxDiff(num1) << endl;
 
     // Test case 2
-    int num2 = 90;
+    int num2 = 9;
     cout << "Input: " << num2 << endl;
-    cout << "Output: " << sol.minMaxDifference(num2) << endl << endl;
+    cout << "Max Difference: " << sol.maxDiff(num2) << endl;
 
-    // You can add more test cases as needed
+    // Test case 3 (custom)
+    int num3 = 123456;
+    cout << "Input: " << num3 << endl;
+    cout << "Max Difference: " << sol.maxDiff(num3) << endl;
+
     return 0;
 }

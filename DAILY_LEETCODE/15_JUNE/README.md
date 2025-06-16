@@ -1,69 +1,66 @@
-# Leetcode Problem 2566 - Maximum Difference by Remapping a Digit
+## Name of the Problem
 
-## 📝 Problem Statement
+1432. Max Difference You Can Get From Changing an Integer
 
-You are given an integer `num`. You know that Bob will sneakily **remap** one of the 10 possible digits (`0` to `9`) to **another digit**.
+##  Problem Statement
+You are given an integer num. You are allowed to perform two operations independently:
 
-Return the **difference between the maximum and minimum values** Bob can make by **remapping exactly one digit** in `num`.
+Pick a digit x (0 ≤ x ≤ 9).
+Pick another digit y (0 ≤ y ≤ 9), y can be equal to x.
+Replace all occurrences of digit x in num with y.
 
----
+Let:
 
-## 🔧 Constraints and Notes
+a be the result of the first replacement (maximize the number).
+b be the result of the second replacement (minimize the number).
+Return: a - b, i.e., the maximum difference between the two new integers a and b.
 
-- When Bob remaps a digit `d1` to another digit `d2`, Bob replaces **all occurrences** of `d1` in `num` with `d2`.
-- Bob can remap a digit to **itself**, in which case `num` does not change.
-- Bob can use **different digits** to achieve the maximum and minimum numbers.
-- The resulting number after remapping can contain **leading zeroes**.
+Constraints
+1 <= num <= 10^8
 
----
+No leading zero allowed after replacement.
 
-## 💡 Algorithm
+## Algorithm
 
-### ✅ Input: 
-An integer `num`
+Step 1: Convert the number to a string
+Easier to manipulate digits character-by-character.
 
-### ✅ Output: 
-Maximum difference between remapped maximum and minimum numbers
+Step 2: Maximize the number (for a)
+Scan from left to right.
 
----
+Find the first digit that is not '9'.
+Replace all occurrences of that digit with '9'.
 
-### Step 1: Convert Number to String
-- Convert `num` to string `s` to easily manipulate its digits.
+Step 3: Minimize the number (for b)
+If the first digit is not '1', replace all its occurrences with '1'.
+Else, replace the first digit (from 2nd position onwards) that is neither '0' nor '1' with '0'.
 
----
+Step 4: Convert the strings back to integers
+Let maxNum and minNum be the two converted values.
 
-### Step 2: Generate Maximum Value
-- **Goal**: Replace one digit with `9` to maximize the number.
-- Find the **first digit that is not 9**, call it `a`.
-- Replace **all occurrences of `a`** with `'9'` to get the maximum value string.
+Return maxNum - minNum.
 
----
+## Time Complexity
+O(n), where n is the number of digits in num.
 
-### Step 3: Generate Minimum Value
-- **Goal**: Replace one digit with `0` or `1` to minimize the number.
-- If the **first digit** is not `'1'`, replace it with `'1'`.
-- Otherwise, find the **first digit that is not `'0'` or `'1'`**, call it `b`.
-- Replace **all occurrences of `b`** with `'0'` to get the minimum value string.
+We scan and replace characters in the string two times.
 
----
 
-### Step 4: Convert Back to Integers
-- Convert both remapped strings to integers.
+## Example Dry Run
+Example 1:
+Input: num = 555
 
----
+Max: Replace 5 -> 9 → 999
+Min: Replace 5 -> 1 → 111
 
-### Step 5: Return the Difference
-- Return `maxNum - minNum`.
+Output: 999 - 111 = 888
 
----
 
-## 🧮 Examples
+Example 2:
+Input: num = 9
 
-### Example 1:
-```text
-Input: 11891
+Max: 9 -> 9 → 9
+Min: 9 -> 1 → 1
 
-Max Remap: Replace '1' with '9' → 99899
-Min Remap: Replace '1' with '0' → 00890
+Output: 8
 
-Difference: 99899 - 890 = 99009
