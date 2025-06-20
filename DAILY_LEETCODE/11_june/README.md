@@ -1,5 +1,5 @@
 ## Name of the Prolem
-Maximum Difference Between Even and Odd Frequency II
+3445. Maximum Difference Between Even and Odd Frequency II
 
 ## Problem Statement
 You are given a string s consisting of digits '0' to '4' and an integer k.
@@ -13,6 +13,8 @@ Character b has a non-zero odd frequency.
 Return the maximum difference freq(a) - freq(b) possible under the above conditions.
 If no valid substring exists, return -1.
 
+Note that subs can contain more than 2 distinct characters.
+ 
 ## Examples
 
 Example 1:
@@ -39,6 +41,15 @@ Example 3:
 
 Input: s = "110", k = 3
 Output: -1
+
+## Constraints:
+3 <= s.length <= 3 * 104
+
+s consists only of digits '0' to '4'.
+
+The input is generated that at least one substring has a character with an even frequency and a character with an odd frequency.
+
+1 <= k <= s.length
 
 
 ## Algorithm

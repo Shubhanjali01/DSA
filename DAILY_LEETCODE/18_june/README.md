@@ -16,6 +16,7 @@ Example 1:
 
 Input: nums = [1,3,4,8,7,9,3,5,1], k = 2  
 Output: [[1,1,3],[3,4,5],[7,8,9]]
+
 Example 2:
 
 Input: nums = [2,4,2,2,5,2], k = 2  
