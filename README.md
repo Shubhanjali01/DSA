@@ -1,2 +1,5 @@
 # **Data Structure and Algorithms**
-<h style="width:100">![alt text](images.jpg)</h>
+
+
+<img src="images.jpg" alt="Data Structures" width="500"/>
+
