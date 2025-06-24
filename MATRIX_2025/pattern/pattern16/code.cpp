@@ -11,7 +11,7 @@ int main(){
         }
         // print increasing letters
         for(int j=0;j<i;j++){
-            char ch = 'A'+j;
+            char ch = 'A'+j; 
             cout<<ch;
         }
 
